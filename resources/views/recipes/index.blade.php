@@ -1,14 +1,16 @@
 <x-layout title="Recipes">
     <h1>Recipes</h1>
-    <ul>
+    <td>
         @foreach ($recipes as $recipe)
-{{--            <li>{{$recipe->user_id}}</li>--}}
-{{--            <li>{{$recipe->category_id}}</li>--}}
-            <li>{{$recipe->title}}</li>
-            <li>{{$recipe->ingredients}}</li>
-            <li>{{$recipe->instructions}}</li>
-            <li>{{$recipe->prep_time}} minuten</li>
-{{--            <li>{{$recipe->image_url}}</li>--}}
+{{--            <tr>{{$recipe->user_id}}</tr>--}}
+{{--            <tr>{{$recipe->category_id}}</tr>--}}
+            <tr>{{$recipe->title}}</tr>
+            <tr>{{$recipe->ingredients}}</tr>
+            <tr>{{$recipe->instructions}}</tr>
+            <tr>{{$recipe->prep_time}} minuten</tr>
+{{--            <tr>{{$recipe->image_url}}</tr>--}}
+            <br>
+            <br>
         @endforeach
-    </ul>
+    </td>
 </x-layout>

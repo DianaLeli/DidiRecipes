@@ -7,29 +7,27 @@ use Illuminate\Http\Request;
 
 class RecipeController extends Controller
 {
+    /**
+     * Show the Recipes from DB on Recipes page
+     */
     public function index()
     {
         $recipes = Recipe::all();
 
         return view('recipes.index', compact('recipes'));
-
-//        $recipe = new Recipe();
-//        $recipe->title = 'Soep';
-//        $recipe->ingredients = '';
-//        $recipe->instructions = '';
-//        $recipe->prep_time = '20';
     }
 
-    public function show()
-    {
-
-    }
-
+    /**
+     * Show form to create a new Recipe
+     */
     public function create()
     {
         return view('recipes.create');
     }
 
+    /**
+     * Store newly created Recipe in DB
+     */
     public function store(Request $request)
     {
         // validatie op de data
@@ -57,6 +55,17 @@ class RecipeController extends Controller
         return redirect()->route('recipes.index');
     }
 
+    /**
+     * Show Recipe Details
+     */
+    public function show(Recipe $recipe)
+    {
+        return view('recipes.show', ['recipe' => $recipe]);
+    }
+
+    /**
+     * Delete a Recipe
+     */
     public function destroy(Recipe $recipe)
     {
         $recipe->delete();

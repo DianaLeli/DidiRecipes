@@ -28,7 +28,7 @@
 </head>
 <body>
 <nav>
-    <a href="/">Home</a>
+    <a href="/home">Home</a>
     <a href="/recipes">Recipes</a>
     <a href="/recipes/create">Create Recipe</a>
 </nav>
