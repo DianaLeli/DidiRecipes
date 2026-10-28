@@ -47,7 +47,7 @@ class RecipeController extends Controller
         $recipe->ingredients = $request->input('ingredients');
         $recipe->instructions = $request->input('instructions');
         $recipe->prep_time = $request->input('prep_time');
-        $recipe->image_url = 'temp';
+        $recipe->image_url = $request->input('image_url');
 
         $recipe->save();
 

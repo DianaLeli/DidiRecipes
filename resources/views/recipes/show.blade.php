@@ -1,4 +1,6 @@
 <x-layout>
+    <img src="{{ $recipe->image_url }}">
+
     <h1>{{ $recipe->title }}</h1>
     <p>Preparation time: {{ $recipe->prep_time }} minutes</p>
 

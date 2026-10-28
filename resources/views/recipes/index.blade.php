@@ -25,17 +25,11 @@
         <article class="recipe-card">
             <h2>{{ $recipe->title }}</h2>
 
-            <p>
-                Preparation time:
-                {{ $recipe->prep_time }} minutes
-            </p>
+            <img src="{{ $recipe->image_url }}">
 
-            <a
-                href="{{ route('recipes.show', $recipe) }}"
-                class="button"
-            >
-                More details
-            </a>
+            <p>Preparation time: {{ $recipe->prep_time }} minutes</p>
+
+            <a href="{{ route('recipes.show', $recipe) }}" class="button">More details</a>
         </article>
     @endforeach
 </div>
