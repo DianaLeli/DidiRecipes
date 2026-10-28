@@ -74,6 +74,31 @@
         button:hover {
             background: #7c2d12;
         }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgb(41 37 36 / 12%);
+        }
+
+        .recipes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .recipe-card {
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .recipe-card h2 {
+            margin-top: 0;
+        }
     </style>
 
 </head>
