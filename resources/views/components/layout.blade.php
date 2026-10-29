@@ -29,10 +29,24 @@
 
         nav {
             display: flex;
+            align-items: center;
             flex-wrap: wrap;
             gap: 1rem;
             padding-bottom: 1rem;
             border-bottom: 1px solid #d6d3d1;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-left: auto;
         }
 
         a {
@@ -135,9 +149,16 @@
 </head>
 <body>
 <nav>
-    <a href="/home">Home</a>
-    <a href="/recipes">Recipes</a>
-    <a href="/recipes/create">Create Recipe</a>
+    <div class="nav-left">
+        <a href="/home">Home</a>
+        <a href="/recipes">Recipes</a>
+        <a href="/recipes/create">Create Recipe</a>
+    </div>
+
+    <div class="nav-right">
+        <a href="/register">Register</a>
+        <a href="/login">Login</a>
+    </div>
 </nav>
 
 <main>
