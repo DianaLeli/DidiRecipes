@@ -1,17 +1,22 @@
 <x-layout>
-<h1>Recipes</h1>
+    <h1>Recipes</h1>
 
-<div class="recipes">
-    @foreach ($recipes as $recipe)
-        <article class="recipe-card">
-            <h2>{{ $recipe->title }}</h2>
+    <form action="{{ route('recipes.index') }}" method="GET">
+        <input type="text" name="search">
+        <button>Search</button>
+    </form>
 
-            <img src="{{ $recipe->image_url }}">
+    <div class="recipes">
+        @foreach ($recipes as $recipe)
+            <article class="recipe-card">
+                <h2>{{ $recipe->title }}</h2>
 
-            <p>Preparation time: {{ $recipe->prep_time }} minutes</p>
+                <img src="{{ $recipe->image_url }}" alt="{{ $recipe->title }}">
 
-            <a href="{{ route('recipes.show', $recipe) }}" class="button">More details</a>
-        </article>
-    @endforeach
-</div>
+                <p>Preparation time: {{ $recipe->prep_time }} minutes</p>
+
+                <a href="{{ route('recipes.show', $recipe) }}" class="button">More details</a>
+            </article>
+        @endforeach
+    </div>
 </x-layout>

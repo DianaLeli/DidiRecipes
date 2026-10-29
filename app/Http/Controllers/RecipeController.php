@@ -10,9 +10,19 @@ class RecipeController extends Controller
     /**
      * Show the Recipes from DB on Recipes page
      */
-    public function index()
+    public function index(Request $request)
     {
-        $recipes = Recipe::all();
+        $search = $request->input('search');
+        $query = Recipe::query();
+
+        $query->when($search, function ($query) use ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('title', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
+            });
+        });
+
+        $recipes = $query->get();
 
         return view('recipes.index', compact('recipes'));
     }
