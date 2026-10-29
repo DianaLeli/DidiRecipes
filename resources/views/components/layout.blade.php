@@ -85,19 +85,50 @@
 
         .recipes {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 20px;
             padding: 20px 0;
         }
 
         .recipe-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-height: 380px;
+            overflow: hidden;
             border: 1px solid #ddd;
             border-radius: 12px;
             padding: 20px;
+            background: white;
+        }
+
+        .recipe-card img {
+            width: 100%;
+            height: 180px;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            margin-bottom: 1rem;
         }
 
         .recipe-card h2 {
-            margin-top: 0;
+            margin: 0 0 0.5rem;
+            font-size: 1.15rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .recipe-card p {
+            margin: 0 0 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .recipe-card a:last-child {
+            margin-top: auto;
         }
     </style>
 
