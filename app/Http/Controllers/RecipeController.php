@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
 
@@ -12,19 +13,24 @@ class RecipeController extends Controller
      */
     public function index(Request $request)
     {
-        $search = $request->input('search');
-        $query = Recipe::query();
+        $recipes = Recipe::query()
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $query->where(function ($query) use ($request) {
+                    $query->where('title', 'like', '%' . $request->search . '%')
+                        ->orWhere('content', 'like', '%' . $request->search . '%');
+                });
+            })
+            ->when($request->filled('category'), function ($query) use ($request) {
+                $query->where('category_id', $request->category);
+            })
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
 
-        $query->when($search, function ($query) use ($search) {
-            $query->where(function ($query) use ($search) {
-                $query->where('title', 'like', "%{$search}%")
-                    ->orWhere('description', 'like', "%{$search}%");
-            });
-        });
-
-        $recipes = $query->get();
-
-        return view('recipes.index', compact('recipes'));
+        return view('recipes.index', [
+            'recipes'   => $recipes,
+            'categories' => Category::orderBy('name')->get(),
+        ]);
     }
 
     /**
