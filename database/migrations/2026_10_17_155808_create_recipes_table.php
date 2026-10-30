@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('recipes', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->integer('category_id');
             $table->string('title', 100);
             $table->text('ingredients');

@@ -50,6 +50,7 @@ class RecipeController extends Controller
     {
         // validatie op de data
         $request->validate([
+            'category_id' => 'required|exists:categories,id',
             'title' => 'required|min:3',
             'ingredients' => 'required',
             'instructions' => 'required',
@@ -59,7 +60,7 @@ class RecipeController extends Controller
 
         // info in database zetten
         $recipe = new Recipe();
-        $recipe->user_id = 1;
+        $recipe->user_id = auth()->id();
         $recipe->category_id = $request->input('category_id');
         $recipe->title = $request->input('title');
         $recipe->ingredients = $request->input('ingredients');
