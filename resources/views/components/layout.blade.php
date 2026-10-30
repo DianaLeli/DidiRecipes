@@ -158,6 +158,16 @@
     <div class="nav-right">
         <a href="/register">Register</a>
         <a href="/login">Login</a>
+        <a href="/profile">Profile</a>
+        <form method="POST" action="{{ route('logout') }}">
+        @csrf
+
+        <a href="{{ route('logout') }}"
+                         onclick="event.preventDefault();
+                         this.closest('form').submit();">
+            {{ __('Log Out') }}
+        </a>
+        </form>
     </div>
 </nav>
 
