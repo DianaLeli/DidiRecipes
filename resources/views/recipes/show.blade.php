@@ -2,7 +2,11 @@
     <img src="{{ $recipe->image_url }}" alt="{{ $recipe->title }}">
 
     <h1>{{ $recipe->title }}</h1>
-    <p>Preparation time: {{ $recipe->prep_time }} minutes</p>
+    <p>
+        Preparation time: {{ $recipe->prep_time }} minutes.
+        <br>
+        Category: {{ $recipe->category->name }}
+    </p>
 
     <h2>Ingredients</h2>
     <p>{{ $recipe->ingredients }}</p>

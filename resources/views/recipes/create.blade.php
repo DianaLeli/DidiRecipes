@@ -5,7 +5,7 @@
             <label for="title">Title</label>
             <input type="text" id="title" name="title" value="{{ old('title') }}"/>
             @error('title')
-            <span class="text-red-500"> {{ $message }}</span>
+            <span> {{ $message }}</span>
             @enderror
         </div>
 
@@ -13,7 +13,7 @@
             <label for="ingredients">Ingredients</label>
             <input type="text" id="ingredients" name="ingredients" value="{{ old('ingredients') }}"/>
             @error('ingredients')
-            <span class="text-red-500"> {{ $message }}</span>
+            <span> {{ $message }}</span>
             @enderror
         </div>
 
@@ -21,7 +21,7 @@
             <label for="instructions">Instructions</label>
             <input type="text" id="instructions" name="instructions" value="{{ old('instructions') }}"/>
             @error('instructions')
-            <span class="text-red-500"> {{ $message }}</span>
+            <span> {{ $message }}</span>
             @enderror
         </div>
 
@@ -29,7 +29,26 @@
             <label for="prep_time">Prep Time</label>
             <input type="text" id="prep_time" name="prep_time" value="{{ old('prep_time') }}"/>
             @error('prep_time')
-            <span class="text-red-500"> {{ $message }}</span>
+            <span> {{ $message }}</span>
+            @enderror
+        </div>
+
+        <div>
+            <label for="category_id">Category</label>
+
+            <select name="category_id" id="category_id">
+                <option value="">Choose a category</option>
+
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}"
+                        {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+
+            @error('category_id')
+            <span>{{ $message }}</span>
             @enderror
         </div>
 
@@ -37,7 +56,7 @@
             <label for="image_url">Image URL</label>
             <input type="text" id="image_url" name="image_url" value="{{ old('image_url') }}"/>
             @error('image_url')
-            <span class="text-red-500"> {{ $message }}</span>
+            <span> {{ $message }}</span>
             @enderror
         </div>
 
