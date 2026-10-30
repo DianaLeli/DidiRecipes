@@ -78,11 +78,38 @@
             font: inherit;
         }
 
+        form input,
+        form textarea,
+        form select {
+            width: 100%;
+            display: block;
+        }
+
+        .remember-me label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding-top: 10px;
+        }
+
+        .remember-me input {
+            width: auto;
+            margin: 0;
+        }
+
+        .login-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
         button {
             color: white;
             background: #9a3412;
             border-color: #9a3412;
             cursor: pointer;
+            margin-top: 1rem;
         }
 
         button:hover {
