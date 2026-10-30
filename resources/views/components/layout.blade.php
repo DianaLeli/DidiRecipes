@@ -179,22 +179,26 @@
     <div class="nav-left">
         <a href="/home">Home</a>
         <a href="/recipes">Recipes</a>
-        <a href="/recipes/create">Create Recipe</a>
     </div>
 
     <div class="nav-right">
-        <a href="/register">Register</a>
-        <a href="/login">Login</a>
-        <a href="/profile">Profile</a>
-        <form method="POST" action="{{ route('logout') }}">
-        @csrf
+        @guest
+            <a href="/register">Register</a>
+            <a href="/login">Login</a>
+        @endguest
 
-        <a href="{{ route('logout') }}"
-                         onclick="event.preventDefault();
-                         this.closest('form').submit();">
-            {{ __('Log Out') }}
-        </a>
-        </form>
+        @auth
+            <span>
+                Hi there, {{ Auth::user()->name }}
+            </span>
+
+            <a href="/recipes/create">Create Recipe</a>
+            <a href="/profile">Profile</a>
+            <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <a href="{{ route('logout') }}" onclick="event.preventDefault(); this.closest('form').submit();">{{ __('Log Out') }}</a>
+            </form>
+        @endauth
     </div>
 </nav>
 

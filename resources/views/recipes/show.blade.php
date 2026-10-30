@@ -14,8 +14,10 @@
     <h2>Instructions</h2>
     <p>{{ $recipe->instructions }}</p>
 
-    <form action="{{ route('recipes.destroy', $recipe) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this recipe?');">
-        @method('DELETE')
-        <button type="submit">DELETE</button>
-    </form>
+    @auth
+        <form action="{{ route('recipes.destroy', $recipe) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this recipe?');">
+            @method('DELETE')
+            <button type="submit">DELETE</button>
+        </form>
+    @endauth
 </x-layout>
