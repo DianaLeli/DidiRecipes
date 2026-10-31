@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout title="Login">
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 

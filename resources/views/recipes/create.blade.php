@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout title="Create Recipe">
     <h1>Create new Recipe</h1>
     <form action="{{ route('recipes.store')  }}" method="post">
         <div>

@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout title="Recipes">
     <h1>Recipes</h1>
 
     <form action="{{ route('recipes.index') }}" method="GET">

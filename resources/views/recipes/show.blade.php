@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout title="{{ $recipe->title }}">
     <img src="{{ $recipe->image_url }}" alt="{{ $recipe->title }}">
 
     <h1>{{ $recipe->title }}</h1>
