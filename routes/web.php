@@ -15,6 +15,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/recipes/create', [RecipeController::class, 'create'])->name('recipes.create');
     Route::post('/recipes', [RecipeController::class, 'store'])->name('recipes.store');
     Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
+    Route::get('/admin', function () {return view('admin');})->name('admin');
 });
 
 Route::get('/home', function () {return view('home');})->name('home');

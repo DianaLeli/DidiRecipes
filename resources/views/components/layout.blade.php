@@ -192,6 +192,10 @@
                 Hi there, {{ Auth::user()->name }}
             </span>
 
+            @can('view-admin')
+            <a href="/admin">Admin</a>
+            @endcan
+
             <a href="/recipes/create">Create Recipe</a>
             <a href="/profile">Profile</a>
             <form method="POST" action="{{ route('logout') }}">
