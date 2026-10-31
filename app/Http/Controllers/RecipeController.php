@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RecipeController extends Controller
 {
@@ -28,7 +29,7 @@ class RecipeController extends Controller
             ->withQueryString();
 
         return view('recipes.index', [
-            'recipes'   => $recipes,
+            'recipes' => $recipes,
             'categories' => Category::orderBy('name')->get(),
         ]);
     }
@@ -90,5 +91,19 @@ class RecipeController extends Controller
         $recipe->delete();
 
         // redirect naar recipes.index
-        return redirect()->route('recipes.index')->with('success', 'Deleted Recipe Successfully');}
+        return redirect()->route('recipes.index')->with('success', 'Deleted Recipe Successfully');
+    }
+
+    public function edit(Recipe $recipe)
+    {
+        return view('recipes.edit', [
+            'recipe' => $recipe,
+            'categories' => Category::orderBy('name')->get(),
+        ]);
+    }
+
+    public function update(UpdateRecipeRequest $request, Recipe $recipe)
+    {
+
+    }
 }

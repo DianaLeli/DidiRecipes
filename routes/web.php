@@ -13,9 +13,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/recipes/create', [RecipeController::class, 'create'])->name('recipes.create');
+    Route::get('/recipes/{recipe}/edit', [RecipeController::class, 'edit'])->name('recipes.edit');
     Route::post('/recipes', [RecipeController::class, 'store'])->name('recipes.store');
     Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
-    Route::get('/admin', function () {return view('admin');})->name('admin');
+    Route::get('/admin', function () {return view('admin');})->middleware(['auth', 'can:view-admin']);
 });
 
 Route::get('/home', function () {return view('home');})->name('home');
