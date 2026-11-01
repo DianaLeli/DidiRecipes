@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecipeController;
+use App\Models\Recipe;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {return view('welcome');});
@@ -17,7 +18,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/recipes/{recipe}', [RecipeController::class, 'update'])->name('recipes.update');
     Route::post('/recipes', [RecipeController::class, 'store'])->name('recipes.store');
     Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
-    Route::get('/admin', function () {return view('admin');})->middleware(['auth', 'can:view-admin']);
+
+    Route::get('/admin', function () {$recipes = Recipe::with('user')->latest()->get();
+        return view('admin', compact('recipes'));
+    })->middleware(['can:view-admin']);
+    Route::post('/admin/recipes/{recipe}/toggle-status', [RecipeController::class, 'toggleStatus'])->middleware(['can:view-admin'])->name('admin.recipes.toggle-status');
 });
 
 Route::get('/home', function () {return view('home');})->name('home');

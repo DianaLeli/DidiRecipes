@@ -171,6 +171,108 @@
         .recipe-card a:last-child {
             margin-top: auto;
         }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            background: white;
+            border: 1px solid #d6d3d1;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .admin-table th,
+        .admin-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #e7e5e4;
+        }
+
+        .admin-table th {
+            background: #f5f5f4;
+            color: #57534e;
+            font-weight: 600;
+        }
+
+        .admin-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .admin-table tr:hover {
+            background: #fafaf9;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .active {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .inactive {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .admin-table button {
+            margin: 0;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+        }
+
+        .admin-table .activate {
+            background: #166534;
+            border-color: #166534;
+        }
+
+        .admin-table .activate:hover {
+            background: #14532d;
+        }
+
+        .admin-table .deactivate {
+            background: #9a3412;
+            border-color: #9a3412;
+        }
+
+        .admin-table .deactivate:hover {
+            background: #7c2d12;
+        }
+
+        .admin-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .admin-actions form {
+            margin: 0;
+        }
+
+        .admin-actions button {
+            margin: 0;
+        }
+
+        .edit-button {
+            display: inline-block;
+            padding: 6px 12px;
+            background: #57534e;
+            color: white;
+            text-decoration: none;
+            border-radius: 0.35rem;
+            font-size: 0.85rem;
+        }
+
+        .edit-button:hover {
+            background: #44403c;
+            color: white;
+        }
     </style>
 
 </head>

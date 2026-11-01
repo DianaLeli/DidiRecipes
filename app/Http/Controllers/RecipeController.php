@@ -14,7 +14,7 @@ class RecipeController extends Controller
      */
     public function index(Request $request)
     {
-        $recipes = Recipe::query()
+        $recipes = Recipe::where('is_active', true)
             ->when($request->filled('search'), function ($query) use ($request) {
                 $query->where(function ($query) use ($request) {
                     $query->where('title', 'like', '%' . $request->search . '%')
@@ -80,6 +80,10 @@ class RecipeController extends Controller
      */
     public function show(Recipe $recipe)
     {
+        if (!$recipe->is_active) {
+            abort(404);
+        }
+
         return view('recipes.show', ['recipe' => $recipe]);
     }
 
@@ -88,22 +92,34 @@ class RecipeController extends Controller
      */
     public function destroy(Recipe $recipe)
     {
+        Gate::authorize('delete-recipe', $recipe);
+
         $recipe->delete();
 
         // redirect naar recipes.index
         return redirect()->route('recipes.index')->with('success', 'Deleted Recipe Successfully');
     }
 
+    /**
+     * Edit a Recipe
+     */
     public function edit(Recipe $recipe)
     {
+        Gate::authorize('update-recipe', $recipe);
+
         return view('recipes.edit', [
             'recipe' => $recipe,
             'categories' => Category::orderBy('name')->get(),
         ]);
     }
 
+    /**
+     * Update a Recipe
+     */
     public function update(Recipe $recipe)
     {
+        Gate::authorize('update-recipe', $recipe);
+
         $recipe->update([
             'category_id' => request('category_id'),
             'title' => request('title'),
@@ -114,5 +130,13 @@ class RecipeController extends Controller
         ]);
 
         return redirect()->route('recipes.show', $recipe);
+    }
+
+    public function toggleStatus(Recipe $recipe)
+    {
+        $recipe->is_active = !$recipe->is_active;
+        $recipe->save();
+
+        return redirect()->back()->with('success', 'Recipe status updated!');
     }
 }

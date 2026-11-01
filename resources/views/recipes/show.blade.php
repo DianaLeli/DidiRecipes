@@ -14,14 +14,18 @@
     <h2>Instructions</h2>
     <p>{{ $recipe->instructions }}</p>
 
-    @auth
-        <form action="{{ route('recipes.destroy', $recipe) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this recipe?');">
-            @method('DELETE')
-            <button type="submit">Delete</button>
-        </form>
+        @can('delete-recipe', $recipe)
+            <form action="{{ route('recipes.destroy', $recipe->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit">Delete Recipe</button>
+            </form>
+        @endcan
 
-        <form action="{{ route('recipes.edit', $recipe->id) }}" method="get">
-            <button type="submit">Edit Recipe</button>
-        </form>
-    @endauth
+        @can('update-recipe', $recipe)
+            <form action="{{ route('recipes.edit', $recipe->id) }}" method="GET">
+                @csrf
+                <button type="submit">Edit Recipe</button>
+            </form>
+        @endcan
 </x-layout>
