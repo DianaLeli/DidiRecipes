@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecipeController;
 use App\Models\Recipe;
@@ -20,9 +21,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/recipes/{recipe}', [RecipeController::class, 'destroy'])->name('recipes.destroy');
 
     Route::get('/admin', function () {$recipes = Recipe::with('user')->latest()->get();
-        return view('admin', compact('recipes'));
-    })->middleware(['can:view-admin']);
-    Route::post('/admin/recipes/{recipe}/toggle-status', [RecipeController::class, 'toggleStatus'])->middleware(['can:view-admin'])->name('admin.recipes.toggle-status');
+        return view('admin', compact('recipes'));})->middleware(['can:view-admin']);
+    Route::post('/admin/recipes/{recipe}/toggle-status', [RecipeController::class, 'toggleStatus'])->name('admin.recipes.toggle-status')
+        ->middleware(['can:view-admin']);
+    Route::post('/recipes/{recipe}/comments', [CommentController::class, 'store'])->name('comments.store');
 });
 
 Route::get('/home', function () {return view('home');})->name('home');

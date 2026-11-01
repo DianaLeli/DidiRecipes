@@ -1,4 +1,13 @@
 <x-layout title="Create Recipe">
+    @if($commentCount < 5)
+
+        <div class="alert alert-warning">
+            <h2>You cannot create a recipe yet!</h2>
+            <p>You must post at least 5 comments before you can create a recipe.</p>
+            <p>You have posted {{ $commentCount }} out of 5 comments.</p>
+        </div>
+    @else
+
     <h1>Create new Recipe</h1>
     <form action="{{ route('recipes.store')  }}" method="post">
         <div>
@@ -62,4 +71,5 @@
 
         <button type="submit" name="submit">Save</button>
     </form>
+    @endif
 </x-layout>

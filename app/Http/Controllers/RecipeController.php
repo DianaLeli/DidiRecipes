@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -39,9 +40,18 @@ class RecipeController extends Controller
      */
     public function create()
     {
+        $commentCount = Comment::where('user_id', auth()->id())->count();
+
+        if ($commentCount < 5) {
+            return view('recipes.create', [
+                'commentCount' => $commentCount,
+                'categories' => collect(),
+            ]);
+        }
+
         $categories = Category::all();
 
-        return view('recipes.create', compact('categories'));
+        return view('recipes.create', compact('categories', 'commentCount'));
     }
 
     /**
@@ -49,6 +59,14 @@ class RecipeController extends Controller
      */
     public function store(Request $request)
     {
+        $commentCount = Comment::where('user_id', auth()->id())->count();
+
+        if ($commentCount < 5) {
+            return redirect()->route('recipes.create')->with('error',
+                'You must post at least 5 comments before creating a recipe.'
+            );
+        }
+
         // validatie op de data
         $request->validate([
             'category_id' => 'required|exists:categories,id',
@@ -107,10 +125,9 @@ class RecipeController extends Controller
     {
         Gate::authorize('update-recipe', $recipe);
 
-        return view('recipes.edit', [
-            'recipe' => $recipe,
-            'categories' => Category::orderBy('name')->get(),
-        ]);
+        $categories = Category::all();
+
+        return view('recipes.edit', compact('recipe', 'categories'));
     }
 
     /**

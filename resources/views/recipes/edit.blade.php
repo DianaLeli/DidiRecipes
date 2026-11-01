@@ -1,5 +1,6 @@
 <x-layout title="Edit Recipe">
     <h1>Edit Recipe</h1>
+
     <form action="/recipes/{{ $recipe->id }}" method="post">
         @csrf
         @method('PATCH')
