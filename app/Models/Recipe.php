@@ -7,6 +7,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Recipe extends Model
 {
+    protected $fillable = [
+        'title',
+        'description',
+        'ingredients',
+        'instructions',
+        'prep_time',
+        'category_id',
+        'image_url',
+    ];
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);

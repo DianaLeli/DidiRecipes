@@ -17,7 +17,11 @@
     @auth
         <form action="{{ route('recipes.destroy', $recipe) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this recipe?');">
             @method('DELETE')
-            <button type="submit">DELETE</button>
+            <button type="submit">Delete</button>
+        </form>
+
+        <form action="{{ route('recipes.edit', $recipe->id) }}" method="get">
+            <button type="submit">Edit Recipe</button>
         </form>
     @endauth
 </x-layout>

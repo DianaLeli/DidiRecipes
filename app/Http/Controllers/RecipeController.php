@@ -102,8 +102,17 @@ class RecipeController extends Controller
         ]);
     }
 
-    public function update(UpdateRecipeRequest $request, Recipe $recipe)
+    public function update(Recipe $recipe)
     {
+        $recipe->update([
+            'category_id' => request('category_id'),
+            'title' => request('title'),
+            'ingredients' => request('ingredients'),
+            'instructions' => request('instructions'),
+            'prep_time' => request('prep_time'),
+            'image_url' => request('image_url'),
+        ]);
 
+        return redirect()->route('recipes.show', $recipe);
     }
 }

@@ -1,46 +1,68 @@
-<x-layout>
-<h1>Edit Recipe</h1>
+<x-layout title="Edit Recipe">
+    <h1>Edit Recipe</h1>
+    <form action="/recipes/{{ $recipe->id }}" method="post">
+        @csrf
+        @method('PATCH')
 
-<form method="POST" action="{{ route('recipes.update', $recipe) }}" enctype="multipart/form-data">
-    @csrf
-    @method('PUT')
+        <div>
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" value="{{ $recipe->title }}"/>
+            @error('title')
+            <span> {{ $message }}</span>
+            @enderror
+        </div>
 
-    <p>
-        <label for="title">Title</label><br>
-        <input id="title" name="title" value="{{ old('title', $recipe->title) }}">
-        @error('title') <br><span style="color:#b91c1c">{{ $message }}</span> @enderror
-    </p>
+        <div>
+            <label for="ingredients">Ingredients</label>
+            <input type="text" id="ingredients" name="ingredients" value="{{ $recipe->ingredients }}"/>
+            @error('ingredients')
+            <span> {{ $message }}</span>
+            @enderror
+        </div>
 
-    <p>
-        <label for="description">Description</label><br>
-        <textarea id="description" name="description" rows="6">{{ old('description', $recipe->description) }}</textarea>
-        @error('description') <br><span style="color:#b91c1c">{{ $message }}</span> @enderror
-    </p>
+        <div>
+            <label for="instructions">Instructions</label>
+            <input type="text" id="instructions" name="instructions" value="{{ $recipe->instructions }}"/>
+            @error('instructions')
+            <span> {{ $message }}</span>
+            @enderror
+        </div>
 
-    <p>
-        <label for="category_id">Category</label><br>
-        <select id="category_id" name="category_id">
-            @foreach ($categories as $category)
-                <option value="{{ $category->id }}"
-                    @selected(old('category_id', $recipe->category_id) == $category->id)>
-                    {{ $category->name }}
-                </option>
-            @endforeach
-        </select>
-        @error('category_id') <br><span style="color:#b91c1c">{{ $message }}</span> @enderror
-    </p>
+        <div>
+            <label for="prep_time">Prep Time</label>
+            <input type="text" id="prep_time" name="prep_time" value="{{ $recipe->prep_time }}"/>
+            @error('prep_time')
+            <span> {{ $message }}</span>
+            @enderror
+        </div>
 
-    <p>
-        <label for="image">Image</label><br>
-        @if ($recipe->image_url)
-            <img src="{{ asset('storage/' . $recipe->image_url) }}" alt="" style="max-width:200px"><br>
-        @endif
-        <input id="image" name="image">
-        <small>Leave blank to keep the current image.</small>
-        @error('image') <br><span style="color:#b91c1c">{{ $message }}</span> @enderror
-    </p>
+        <div>
+            <label for="category_id">Category</label>
 
-    <button type="submit">Save</button>
-    <a href="{{ route('recipes.show', $recipe) }}">Cancel</a>
-</form>
+            <select name="category_id" id="category_id">
+                <option value="">Choose a category</option>
+
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}"
+                        {{ $recipe->category_id == $category->id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+
+            @error('category_id')
+            <span>{{ $message }}</span>
+            @enderror
+        </div>
+
+        <div>
+            <label for="image_url">Image URL</label>
+            <input type="text" id="image_url" name="image_url" value="{{ $recipe->image_url }}"/>
+            @error('image_url')
+            <span> {{ $message }}</span>
+            @enderror
+        </div>
+
+        <button type="submit" name="submit">Save</button>
+    </form>
 </x-layout>
